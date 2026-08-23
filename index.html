@@ -259,8 +259,11 @@ h3{font-size:clamp(1.1rem,4.4vw,1.3rem);font-stretch:104%;line-height:1.24;lette
 @media (min-width:560px){.cmp-knob{width:52px;height:52px}}
 .cmp-knob svg{width:24px;height:24px}
 .cmp input[type=range]{
-  position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:6;
+  position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;z-index:6;pointer-events:none;
 }
+.cmp{cursor:ew-resize}
+.cmp-knob{transition:transform .25s ease}
+.cmp.dragging .cmp-knob{transform:translate(-50%,-50%) scale(1.08)}
 .cmp-hint{margin-top:12px;font-size:.8rem;color:var(--dim);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
 /* ============ CARDURI ============ */
@@ -996,14 +999,55 @@ footer{border-top:1px solid var(--line);padding:30px 0 calc(96px + env(safe-area
   var rng = document.getElementById('cmpRange'),
       clean = document.getElementById('clean'),
       line = document.getElementById('cmpLine'),
-      knob = document.getElementById('cmpKnob');
-  function setCmp(){
-    var v = +rng.value;
+      knob = document.getElementById('cmpKnob'),
+      cmpBox = document.getElementById('cmp');
+  function paintCmp(v){
     clean.style.clipPath = 'inset(0 0 0 '+v+'%)';
     line.style.left = v+'%';
     knob.style.left = v+'%';
   }
-  rng.addEventListener('input', setCmp); setCmp();
+  function setCmp(){ paintCmp(+rng.value); }
+  rng.addEventListener('input', setCmp);
+  setCmp();
+
+  /* tragere cu degetul sau cu mouse-ul, oriunde pe imagine */
+  function fromX(x){
+    var r = cmpBox.getBoundingClientRect();
+    var v = Math.max(0, Math.min(100, (x - r.left) / r.width * 100));
+    rng.value = v; paintCmp(v);
+  }
+  var dragging = false;
+  cmpBox.addEventListener('pointerdown', function(e){
+    dragging = true; cmpBox.classList.add('dragging');
+    if (cmpBox.setPointerCapture) { try { cmpBox.setPointerCapture(e.pointerId); } catch(err){} }
+    fromX(e.clientX);
+  });
+  cmpBox.addEventListener('pointermove', function(e){
+    if (!dragging) return;
+    e.preventDefault();
+    fromX(e.clientX);
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(function(ev){
+    cmpBox.addEventListener(ev, function(){ dragging = false; cmpBox.classList.remove('dragging'); });
+  });
+
+  /* la prima vedere, linia se misca singura o data ca sa se inteleaga ca se trage */
+  var nudged = false;
+  var nio = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting || nudged) return;
+      nudged = true; nio.disconnect();
+      if (reduce) return;
+      var t0 = performance.now();
+      (function step(now){
+        var p = Math.min((now - t0) / 1700, 1);
+        var v = 50 + Math.sin(p * Math.PI * 2) * 22;
+        rng.value = v; paintCmp(v);
+        if (p < 1) requestAnimationFrame(step); else { rng.value = 50; paintCmp(50); }
+      })(t0);
+    });
+  }, {threshold:.5});
+  nio.observe(cmpBox);
 
   function paint(id, kind){
     var c = document.getElementById(id), x = c.getContext('2d');
