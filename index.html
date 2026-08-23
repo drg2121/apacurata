@@ -32,8 +32,8 @@
   --accent-2:#1a92a8;
   --chrome:#bccdd8;
   --glow:rgba(85,216,230,.2);
-  --murk:#8a7442;
-  --murk-2:#5c4b28;
+  --murk:#7d6b4a;
+  --murk-2:#4f4028;
   --wa:#25d366;
   --wa-fg:#052b1b;
   --btn-fg:#032028;
@@ -57,8 +57,8 @@
     --accent-2:#075263;
     --chrome:#5d7a89;
     --glow:rgba(11,125,146,.15);
-    --murk:#a8873f;
-    --murk-2:#7d6222;
+    --murk:#9a8560;
+    --murk-2:#6d5a35;
     --wa:#128c7e;
     --wa-fg:#ffffff;
     --btn-fg:#f3fcfd;
@@ -81,8 +81,8 @@
   --accent-2:#075263;
   --chrome:#5d7a89;
   --glow:rgba(11,125,146,.15);
-  --murk:#a8873f;
-  --murk-2:#7d6222;
+  --murk:#9a8560;
+  --murk-2:#6d5a35;
   --wa:#128c7e;
   --wa-fg:#ffffff;
   --btn-fg:#f3fcfd;
@@ -240,18 +240,23 @@ h3{font-size:clamp(1.1rem,4.4vw,1.3rem);font-stretch:104%;line-height:1.24;lette
 }
 .cmp canvas{position:absolute;inset:0;width:100%;height:100%}
 .cmp-tag{
-  position:absolute;top:14px;padding:7px 13px;border-radius:999px;
-  font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
-  background:rgba(4,18,27,.55);color:#eaf5f8;backdrop-filter:blur(6px);z-index:3;
+  position:absolute;top:12px;max-width:46%;padding:6px 11px;border-radius:999px;
+  font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  background:rgba(4,18,27,.58);color:#eaf5f8;backdrop-filter:blur(6px);z-index:3;
 }
-.tag-l{left:14px}
-.tag-r{right:14px}
+@media (min-width:560px){
+  .cmp-tag{top:14px;padding:7px 14px;font-size:.68rem;letter-spacing:.12em}
+}
+.tag-l{left:12px}
+.tag-r{right:12px}
 .cmp-line{position:absolute;top:0;bottom:0;width:2px;background:#fff;left:50%;z-index:4;pointer-events:none;box-shadow:0 0 18px rgba(0,0,0,.4)}
 .cmp-knob{
   position:absolute;top:50%;left:50%;translate:-50% -50%;z-index:5;pointer-events:none;
-  width:52px;height:52px;border-radius:50%;background:#fff;color:#04121b;
+  width:44px;height:44px;border-radius:50%;background:#fff;color:#04121b;
   display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.35);
 }
+@media (min-width:560px){.cmp-knob{width:52px;height:52px}}
 .cmp-knob svg{width:24px;height:24px}
 .cmp input[type=range]{
   position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:6;
@@ -648,15 +653,15 @@ footer{border-top:1px solid var(--line);padding:30px 0 calc(96px + env(safe-area
     <div class="cmp rv" id="cmp">
       <div class="cmp-l cmp-dirty"><canvas id="cvDirty" aria-hidden="true"></canvas></div>
       <div class="cmp-l cmp-clean" id="clean"><canvas id="cvClean" aria-hidden="true"></canvas></div>
-      <span class="cmp-tag tag-l">Direct de la robinet</span>
-      <span class="cmp-tag tag-r">Prin cele 4 filtre</span>
+      <span class="cmp-tag tag-l">De la robinet</span>
+      <span class="cmp-tag tag-r">Prin 4 filtre</span>
       <div class="cmp-line" id="cmpLine"></div>
       <div class="cmp-knob" id="cmpKnob" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 4 12l5 6"/><path d="m15 6 5 6-5 6"/></svg>
       </div>
       <input type="range" min="0" max="100" value="50" id="cmpRange" aria-label="Compară apa nefiltrată cu apa filtrată">
     </div>
-    <p class="cmp-hint rv"><span>Imagine ilustrativă — trage cu degetul stânga/dreapta.</span></p>
+    <p class="cmp-hint rv"><span>Imagine ilustrativă. Trage de buton stânga–dreapta.</span></p>
   </div>
 </section>
 
