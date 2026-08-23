@@ -1,0 +1,1028 @@
+<title>Apă Curată Acasă</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ground:#04121b;
+  --ground-2:#071c28;
+  --surface:#0a2331;
+  --raised:#0f2f40;
+  --line:rgba(150,205,225,.15);
+  --line-2:rgba(150,205,225,.3);
+  --text:#e9f4f8;
+  --dim:#9cb6c3;
+  --accent:#55d8e6;
+  --accent-2:#1a92a8;
+  --chrome:#bccdd8;
+  --glow:rgba(85,216,230,.2);
+  --murk:#8a7442;
+  --murk-2:#5c4b28;
+  --wa:#25d366;
+  --wa-fg:#052b1b;
+  --btn-fg:#032028;
+  --shadow:0 26px 70px rgba(0,0,0,.5);
+  --wave-1:rgba(85,216,230,.28);
+  --wave-2:rgba(26,146,168,.26);
+  --wave-3:rgba(188,205,216,.09);
+  --tap:48px;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --ground:#eef4f7;
+    --ground-2:#e3edf1;
+    --surface:#ffffff;
+    --raised:#dfeaef;
+    --line:rgba(6,45,64,.13);
+    --line-2:rgba(6,45,64,.26);
+    --text:#062230;
+    --dim:#4c6674;
+    --accent:#0b7d92;
+    --accent-2:#075263;
+    --chrome:#5d7a89;
+    --glow:rgba(11,125,146,.15);
+    --murk:#a8873f;
+    --murk-2:#7d6222;
+    --wa:#128c7e;
+    --wa-fg:#ffffff;
+    --btn-fg:#f3fcfd;
+    --shadow:0 20px 54px rgba(6,45,64,.13);
+    --wave-1:rgba(11,125,146,.24);
+    --wave-2:rgba(7,82,99,.15);
+    --wave-3:rgba(6,45,64,.06);
+  }
+}
+:root[data-theme="light"]{
+  --ground:#eef4f7;
+  --ground-2:#e3edf1;
+  --surface:#ffffff;
+  --raised:#dfeaef;
+  --line:rgba(6,45,64,.13);
+  --line-2:rgba(6,45,64,.26);
+  --text:#062230;
+  --dim:#4c6674;
+  --accent:#0b7d92;
+  --accent-2:#075263;
+  --chrome:#5d7a89;
+  --glow:rgba(11,125,146,.15);
+  --murk:#a8873f;
+  --murk-2:#7d6222;
+  --wa:#128c7e;
+  --wa-fg:#ffffff;
+  --btn-fg:#f3fcfd;
+  --shadow:0 20px 54px rgba(6,45,64,.13);
+  --wave-1:rgba(11,125,146,.24);
+  --wave-2:rgba(7,82,99,.15);
+  --wave-3:rgba(6,45,64,.06);
+}
+
+/* ============ BAZA ============ */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--text);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit}
+p{margin:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+::selection{background:var(--accent);color:var(--btn-fg)}
+
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.sect{padding:clamp(64px,11vw,140px) 0;position:relative}
+section[id]{scroll-margin-top:78px}
+.alt{background:var(--ground-2);border-block:1px solid var(--line)}
+
+h1,h2,h3{font-family:Archivo,system-ui,sans-serif;font-weight:700;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.45rem,10vw,6rem);font-stretch:115%;line-height:.95;letter-spacing:-.03em}
+h2{font-size:clamp(1.85rem,6.4vw,3.4rem);font-stretch:110%;line-height:1.03;letter-spacing:-.025em}
+h3{font-size:clamp(1.1rem,4.4vw,1.3rem);font-stretch:104%;line-height:1.24;letter-spacing:-.012em}
+.lead{font-size:clamp(1rem,4vw,1.24rem);color:var(--dim);max-width:54ch}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.7rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+}
+.muted{color:var(--dim)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.head{display:grid;gap:14px;max-width:60ch;margin-bottom:clamp(32px,7vw,64px)}
+
+/* ============ NAV ============ */
+.nav{
+  position:sticky;top:0;z-index:60;padding:11px 0;
+  background:color-mix(in oklab, var(--ground) 84%, transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid transparent;transition:border-color .3s,padding .3s;
+}
+.nav.stuck{border-bottom-color:var(--line)}
+.nav-in{width:min(1180px,100% - 40px);margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:44px}
+.brand svg{width:32px;height:32px;flex:none}
+.brand b{display:block;white-space:nowrap;font-family:Archivo,sans-serif;font-stretch:112%;font-size:.95rem;line-height:1.05;letter-spacing:-.01em}
+.brand i{display:block;font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.nav-links{display:none;gap:24px;white-space:nowrap}
+.nav-links a{font-size:.88rem;color:var(--dim);text-decoration:none;position:relative;padding:6px 0}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--accent);transition:right .3s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{right:0}
+.nav-cta{display:flex;gap:8px;align-items:center}
+
+/* ============ BUTOANE ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:var(--tap);padding:13px 22px;border-radius:999px;
+  font-family:"IBM Plex Mono",monospace;font-size:.85rem;letter-spacing:.04em;
+  text-decoration:none;border:1px solid var(--line-2);color:var(--text);
+  background:transparent;cursor:pointer;white-space:nowrap;
+  transition:transform .2s cubic-bezier(.2,.8,.3,1),background .22s,border-color .22s,box-shadow .22s;
+}
+.btn:active{transform:scale(.97)}
+.btn svg{width:19px;height:19px;flex:none}
+.btn-1{background:var(--accent);border-color:var(--accent);color:var(--btn-fg);font-weight:500;box-shadow:0 10px 28px var(--glow)}
+.btn-wa{background:var(--wa);border-color:var(--wa);color:var(--wa-fg);font-weight:500;box-shadow:0 10px 28px rgba(37,211,102,.22)}
+.btn-sm{min-height:42px;padding:9px 15px;font-size:.78rem}
+.btn-ico{min-width:44px;padding:9px 12px}
+@media (hover:hover){
+  .btn:hover{transform:translateY(-2px)}
+  .btn-1:hover{background:var(--accent-2);border-color:var(--accent-2)}
+  .btn-wa:hover{filter:brightness(1.08)}
+  .btn:not(.btn-1):not(.btn-wa):hover{border-color:var(--accent)}
+}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px}
+.cta-row .btn{flex:1 1 auto}
+@media (min-width:520px){.cta-row .btn{flex:0 0 auto}}
+
+/* ============ HERO ============ */
+.hero{position:relative;padding:clamp(26px,7vw,60px) 0 clamp(80px,14vw,120px);overflow:hidden}
+#sea{position:absolute;inset:auto 0 0 0;width:100%;height:46%;z-index:0;pointer-events:none}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{display:grid;gap:clamp(28px,7vw,50px);align-items:center}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln>span{display:block;transform:translateY(105%);animation:rise .95s cubic-bezier(.16,1,.3,1) forwards}
+.hero h1 .ln:nth-child(1)>span{animation-delay:.12s}
+.hero h1 .ln:nth-child(2)>span{animation-delay:.24s;color:var(--accent)}
+@keyframes rise{to{transform:translateY(0)}}
+.fade-up{opacity:0;transform:translateY(18px);animation:fu .8s cubic-bezier(.16,1,.3,1) forwards}
+.d1{animation-delay:.42s}.d2{animation-delay:.54s}.d3{animation-delay:.66s}
+@keyframes fu{to{opacity:1;transform:none}}
+.pill{
+  display:inline-flex;align-items:center;gap:9px;align-self:start;
+  padding:9px 16px;border-radius:999px;border:1px dashed var(--line-2);
+  font-size:.86rem;color:var(--dim);
+}
+.pill span{
+  font-family:"IBM Plex Mono",monospace;font-weight:500;color:var(--accent);
+  font-variant-numeric:tabular-nums;
+}
+.hero-note{display:flex;align-items:center;gap:9px;font-size:.85rem;color:var(--dim)}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--wa);flex:none;position:relative}
+.pulse-dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1.5px solid var(--wa);animation:ping 2.4s ease-out infinite}
+@keyframes ping{0%{opacity:.8;transform:scale(.7)}75%,100%{opacity:0;transform:scale(1.5)}}
+
+/* paharul */
+.glass-wrap{display:flex;justify-content:center}
+.glass{width:min(56vw,250px);height:auto;overflow:visible}
+.gfill{transform:translateY(300px);animation:fill 2.6s cubic-bezier(.35,.8,.3,1) .5s forwards}
+@keyframes fill{to{transform:translateY(0)}}
+.gwave{animation:slide 3.4s linear infinite}
+@keyframes slide{to{transform:translateX(-120px)}}
+.gbub{opacity:.55;animation:up 4.2s ease-in infinite}
+.gbub:nth-of-type(2){animation-delay:1.1s}
+.gbub:nth-of-type(3){animation-delay:2.3s}
+.gbub:nth-of-type(4){animation-delay:3.1s}
+@keyframes up{0%{transform:translateY(0);opacity:0}15%{opacity:.6}100%{transform:translateY(-120px);opacity:0}}
+.drip{animation:drip 3.2s ease-in infinite}
+@keyframes drip{0%,55%{transform:translateY(0);opacity:0}60%{opacity:1}92%,100%{transform:translateY(50px);opacity:0}}
+
+/* ============ CIFRE ============ */
+.strip{border-block:1px solid var(--line);background:color-mix(in oklab,var(--surface) 55%,transparent)}
+.stats{display:grid;grid-template-columns:1fr 1fr}
+.stat{padding:22px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat:nth-child(2n){border-right:0}
+.stat:nth-child(n+3){border-bottom:0}
+.stat b{display:block;font-family:Archivo,sans-serif;font-stretch:112%;font-size:clamp(1.75rem,7vw,2.7rem);line-height:1;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:7px;font-size:.8rem;color:var(--dim);max-width:24ch}
+
+/* ============ COMPARATIE ============ */
+.cmp{
+  position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);
+  aspect-ratio:4/3;box-shadow:var(--shadow);touch-action:pan-y;user-select:none;
+}
+@media (min-width:720px){.cmp{aspect-ratio:16/9}}
+.cmp-l{position:absolute;inset:0}
+.cmp-dirty{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(0,0,0,.22), transparent 45%),
+    radial-gradient(circle at 78% 68%, rgba(0,0,0,.2), transparent 42%),
+    linear-gradient(160deg, var(--murk), var(--murk-2));
+}
+.cmp-clean{
+  background:
+    radial-gradient(circle at 25% 25%, color-mix(in oklab,var(--accent) 55%,transparent), transparent 52%),
+    linear-gradient(160deg, var(--accent-2), color-mix(in oklab,var(--accent) 70%, var(--ground)));
+  clip-path:inset(0 0 0 50%);
+}
+.cmp canvas{position:absolute;inset:0;width:100%;height:100%}
+.cmp-tag{
+  position:absolute;top:14px;padding:7px 13px;border-radius:999px;
+  font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(4,18,27,.55);color:#eaf5f8;backdrop-filter:blur(6px);z-index:3;
+}
+.tag-l{left:14px}
+.tag-r{right:14px}
+.cmp-line{position:absolute;top:0;bottom:0;width:2px;background:#fff;left:50%;z-index:4;pointer-events:none;box-shadow:0 0 18px rgba(0,0,0,.4)}
+.cmp-knob{
+  position:absolute;top:50%;left:50%;translate:-50% -50%;z-index:5;pointer-events:none;
+  width:52px;height:52px;border-radius:50%;background:#fff;color:#04121b;
+  display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.35);
+}
+.cmp-knob svg{width:24px;height:24px}
+.cmp input[type=range]{
+  position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:6;
+}
+.cmp-hint{margin-top:12px;font-size:.8rem;color:var(--dim);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+/* ============ CARDURI ============ */
+.cards{display:grid;gap:14px}
+.card{
+  padding:26px 22px 30px;border-radius:18px;background:var(--surface);
+  border:1px solid var(--line);display:grid;gap:12px;align-content:start;
+  transition:transform .35s cubic-bezier(.2,.8,.3,1),border-color .35s;
+}
+@media (hover:hover){.card:hover{transform:translateY(-5px);border-color:var(--line-2)}}
+.card .ico{width:34px;height:34px;color:var(--accent)}
+.card .tag{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.card p{color:var(--dim);font-size:.95rem}
+
+/* ============ TREPTE ============ */
+.flow{display:grid;gap:clamp(26px,6vw,54px)}
+.rig-box{display:grid;justify-items:center;gap:18px}
+.rig{width:min(100%,360px);height:auto}
+.cart{transition:opacity .45s,filter .45s}
+.cart.off{opacity:.3}
+.rig-cap{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.flowline{stroke-dasharray:9 11;animation:flow 1.5s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-40}}
+.drip2{animation:drip2 3.4s ease-in infinite}
+@keyframes drip2{0%,60%{transform:translateY(0);opacity:0}64%{opacity:1}94%,100%{transform:translateY(26px);opacity:0}}
+.legend{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:10px;font-size:.87rem;color:var(--dim);max-width:42ch}
+.legend li{display:flex;gap:10px;align-items:flex-start}
+.legend b{
+  flex:none;width:21px;height:21px;border-radius:50%;background:var(--accent);color:var(--btn-fg);
+  display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:500;margin-top:1px;
+}
+.steps{display:grid;border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.step .n{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--accent);padding-top:4px}
+.step h3{margin-bottom:6px}
+.step p{color:var(--dim);font-size:.94rem;max-width:50ch}
+.step.on .n{font-weight:500}
+.outlet{margin-top:18px;display:flex;gap:11px;padding:18px;border-radius:14px;background:var(--raised);border:1px solid var(--line);font-size:.92rem;color:var(--dim)}
+.outlet b{color:var(--text)}
+.outlet svg{width:19px;height:19px;flex:none;color:var(--accent);margin-top:2px}
+
+/* ============ CALCULATOR ============ */
+.calc{border-radius:20px;border:1px solid var(--line);background:var(--surface);padding:clamp(22px,5vw,40px);display:grid;gap:24px;box-shadow:var(--shadow)}
+.calc-top{display:grid;gap:22px}
+.sl label{display:block;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.sl .val{font-family:Archivo,sans-serif;font-stretch:112%;font-weight:700;font-size:clamp(1.5rem,6vw,2rem);line-height:1;margin-bottom:14px}
+input[type=range].r{
+  -webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer;
+}
+input[type=range].r::-webkit-slider-runnable-track{height:5px;border-radius:99px;background:var(--line-2)}
+input[type=range].r::-moz-range-track{height:5px;border-radius:99px;background:var(--line-2)}
+input[type=range].r::-webkit-slider-thumb{
+  -webkit-appearance:none;width:30px;height:30px;margin-top:-13px;border-radius:50%;
+  background:var(--accent);border:5px solid var(--surface);box-shadow:0 0 0 1px var(--accent),0 6px 16px var(--glow);
+}
+input[type=range].r::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;background:var(--accent);
+  border:5px solid var(--surface);box-shadow:0 0 0 1px var(--accent);
+}
+.bars{display:grid;gap:16px}
+.bar-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.88rem;margin-bottom:7px}
+.bar-h b{font-family:"IBM Plex Mono",monospace;font-size:1rem;font-variant-numeric:tabular-nums}
+.bar{height:12px;border-radius:99px;background:var(--raised);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;transition:width .55s cubic-bezier(.3,.9,.3,1)}
+.b1{background:var(--chrome)}
+.b2{background:var(--accent)}
+.save{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;padding-top:20px;border-top:1px solid var(--line)}
+.save b{font-family:Archivo,sans-serif;font-stretch:115%;font-weight:700;font-size:clamp(1.7rem,7vw,2.7rem);color:var(--accent);line-height:1;letter-spacing:-.02em}
+.save p{font-size:.9rem}
+.disclaimer{
+  font-size:.83rem;color:var(--dim);padding:14px 16px;border-radius:12px;
+  background:var(--raised);border:1px solid var(--line);max-width:62ch;
+}
+
+/* ============ FAQ ============ */
+.faq{display:grid;gap:0;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  list-style:none;cursor:pointer;display:flex;gap:14px;align-items:center;justify-content:space-between;
+  padding:20px 2px;min-height:var(--tap);font-family:Archivo,sans-serif;font-stretch:106%;font-weight:700;
+  font-size:1.02rem;letter-spacing:-.01em;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .pm{width:22px;height:22px;flex:none;position:relative}
+.faq summary .pm::before,.faq summary .pm::after{content:"";position:absolute;background:var(--accent);border-radius:2px;transition:transform .3s}
+.faq summary .pm::before{top:10px;left:2px;width:18px;height:2px}
+.faq summary .pm::after{left:10px;top:2px;width:2px;height:18px}
+.faq details[open] summary .pm::after{transform:rotate(90deg) scaleX(0)}
+.faq details p{padding:0 2px 22px;color:var(--dim);font-size:.95rem;max-width:60ch}
+.faq details p b{color:var(--text);font-weight:600}
+.faq details[open] p{animation:fu .45s ease forwards}
+
+/* ============ DESPRE ============ */
+.me{
+  border-radius:22px;border:1px solid var(--line);background:var(--surface);
+  padding:clamp(24px,5vw,44px);display:grid;gap:22px;box-shadow:var(--shadow);
+  max-width:860px;margin-inline:auto;
+}
+.me-top{display:flex;align-items:center;gap:16px}
+.mono-badge{
+  flex:none;width:60px;height:60px;border-radius:50%;
+  display:grid;place-items:center;background:var(--raised);border:1.5px solid var(--accent);
+  font-family:Archivo,sans-serif;font-stretch:112%;font-weight:700;font-size:1.15rem;
+  letter-spacing:.02em;color:var(--accent);
+}
+.me-name{font-family:Archivo,sans-serif;font-stretch:112%;font-weight:700;font-size:clamp(1.25rem,5vw,1.6rem);letter-spacing:-.02em;line-height:1.15}
+.me-role{font-size:.85rem;color:var(--dim);margin-top:4px}
+.me-text{color:var(--dim);font-size:clamp(.97rem,3.7vw,1.1rem)}
+.checks{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.checks li{display:flex;gap:11px;font-size:.93rem;color:var(--text)}
+.checks svg{width:18px;height:18px;flex:none;color:var(--accent);margin-top:3px}
+
+/* ============ CONTACT ============ */
+.cbox{
+  border-radius:24px;border:1px solid var(--line);background:var(--surface);
+  padding:clamp(26px,6vw,54px) clamp(20px,5vw,54px);
+  display:grid;gap:18px;justify-items:center;text-align:center;
+  max-width:760px;margin-inline:auto;box-shadow:var(--shadow);
+}
+.cbox h2{max-width:16ch}
+.tel{
+  font-family:Archivo,sans-serif;font-stretch:112%;font-weight:700;
+  font-size:clamp(1.9rem,8.6vw,3.6rem);letter-spacing:-.03em;line-height:1.05;
+  text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap;
+  margin:2px 0 4px;transition:color .25s;
+}
+@media (hover:hover){.tel:hover{color:var(--accent)}}
+.cbtns{display:grid;gap:10px;width:100%;max-width:420px}
+.cbtns .btn{width:100%}
+.qr-head{
+  margin-top:12px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+}
+.qr{display:grid;gap:8px;width:100%;text-align:left}
+.qrow{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  min-height:var(--tap);padding:13px 16px;border-radius:14px;text-decoration:none;
+  background:var(--raised);border:1px solid var(--line);color:var(--text);font-size:.93rem;
+  transition:border-color .22s,transform .22s,background .22s;
+}
+.qrow svg{width:18px;height:18px;flex:none;color:var(--accent)}
+.qrow:active{transform:scale(.99)}
+@media (hover:hover){.qrow:hover{border-color:var(--wa);transform:translateX(3px)}}
+
+footer{border-top:1px solid var(--line);padding:30px 0 calc(96px + env(safe-area-inset-bottom))}
+.foot{display:grid;gap:10px;font-size:.82rem;color:var(--dim)}
+
+/* ============ ACTIUNI FIXE ============ */
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1fr 1fr;gap:9px;
+  padding:9px 14px calc(9px + env(safe-area-inset-bottom));
+  background:color-mix(in oklab,var(--ground) 90%,transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);
+  transform:translateY(110%);transition:transform .4s cubic-bezier(.2,.8,.3,1);
+}
+.callbar.show{transform:none}
+.fab{
+  display:none;position:fixed;right:22px;bottom:24px;z-index:80;align-items:center;gap:10px;
+  padding:14px 20px 14px 16px;border-radius:999px;text-decoration:none;
+  background:var(--wa);color:var(--wa-fg);font-family:"IBM Plex Mono",monospace;font-size:.82rem;
+  box-shadow:0 16px 36px rgba(0,0,0,.3);transition:transform .25s,box-shadow .25s;
+}
+.fab svg{width:22px;height:22px}
+.fab-ring{position:absolute;inset:0;border-radius:999px;border:2px solid var(--wa);animation:ping 2.8s ease-out infinite}
+@media (hover:hover){.fab:hover{transform:translateY(-3px)}}
+
+/* ============ REVEAL ============ */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .75s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ============ BREAKPOINTS ============ */
+@media (min-width:600px){
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .stat{border-bottom:0;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+  .stat:nth-child(2n){border-right:1px solid var(--line)}
+  .cards{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:560px){
+  .cbtns{grid-template-columns:1fr 1fr;max-width:520px}
+  .qr{grid-template-columns:1fr 1fr}
+  .checks{grid-template-columns:1fr 1fr;gap:14px 26px}
+}
+@media (min-width:900px){
+  body{font-size:17px}
+  .nav-links{display:flex}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .calc-top{grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .flow{grid-template-columns:.8fr 1.2fr;align-items:start}
+  .rig-box{position:sticky;top:100px}
+  .hero-grid{grid-template-columns:1.1fr .9fr}
+  .glass{width:min(32vw,330px)}
+  .callbar{display:none}
+  .fab{display:flex}
+  footer{padding-bottom:36px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .rv{opacity:1;transform:none}
+  .hero h1 .ln>span{transform:none}
+  .fade-up{opacity:1;transform:none}
+  .gfill{transform:none}
+}
+</style>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="Apă curată acasă">
+      <svg viewBox="0 0 64 44" fill="none" aria-hidden="true">
+        <path d="M2 40 L18 14 L26 24 L34 6 L50 26 L62 40 Z" fill="var(--accent-2)"/>
+        <path d="M20 22 L20 12 L28 12 L28 20" fill="var(--accent-2)"/>
+        <rect x="22" y="14" width="4" height="4" fill="var(--ground)"/>
+        <path d="M6 38 C 16 30, 22 40, 32 32 S 48 30, 58 38" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <b>Apă curată</b>
+        <i>Purificare la domiciliu</i>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Secțiuni">
+      <a href="#diferenta">Diferența</a>
+      <a href="#dece">De ce</a>
+      <a href="#cum">Cele 4 filtre</a>
+      <a href="#cost">Cât economisești</a>
+      <a href="#intrebari">Întrebări</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-wa btn-sm btn-ico" href="https://wa.me/40767429724?text=Bun%C4%83%20ziua!%20A%C8%99%20dori%20o%20programare%20pentru%20montajul%20sistemului%20de%20purificare%20a%20apei." target="_blank" rel="noopener" aria-label="Scrie pe WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.34.99 2.5c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+      </a>
+      <a class="btn btn-1 btn-sm" href="tel:+40767429724">0767 429 724</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <canvas id="sea" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div style="display:grid;gap:22px">
+        <p class="eyebrow fade-up">Montaj la domiciliu · 4 filtre · robinet separat</p>
+        <h1>
+          <span class="ln"><span>Apa bună</span></span>
+          <span class="ln"><span>nu se cară.</span></span>
+        </h1>
+        <p class="lead fade-up d1">Îți montez sub chiuvetă un sistem cu patru filtre. Deschizi robinetul și curge apă curată — fără bidoane, fără drumuri la magazin, fără cărat pe scări.</p>
+        <p class="pill fade-up d1"><span>Economisești ≈ 1.250 lei pe an</span> într-o casă cu 4 persoane</p>
+        <div class="cta-row fade-up d2">
+          <a class="btn btn-wa" href="https://wa.me/40767429724?text=Bun%C4%83%20ziua!%20A%C8%99%20dori%20o%20programare%20pentru%20montajul%20sistemului%20de%20purificare%20a%20apei." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.34.99 2.5c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+            Scrie pe WhatsApp
+          </a>
+          <a class="btn btn-1" href="tel:+40767429724">Sună: 0767 429 724</a>
+        </div>
+        <p class="hero-note fade-up d3"><span class="pulse-dot"></span> Programează o vizită sau pune o întrebare — răspund eu.</p>
+      </div>
+
+      <div class="glass-wrap fade-up d1">
+        <svg class="glass" viewBox="0 0 200 300" fill="none" aria-hidden="true">
+          <defs>
+            <clipPath id="gclip"><path d="M56 92 h88 l-9 150 a14 14 0 0 1 -14 13 h-42 a14 14 0 0 1 -14 -13 z"/></clipPath>
+            <linearGradient id="gwater" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="var(--accent)" stop-opacity=".85"/>
+              <stop offset="1" stop-color="var(--accent-2)" stop-opacity=".95"/>
+            </linearGradient>
+          </defs>
+
+          <!-- robinet -->
+          <ellipse cx="156" cy="86" rx="13" ry="4" fill="var(--chrome)" opacity=".5"/>
+          <path d="M156 86 V38 q0-16 -16-16 h-24 q-16 0 -16 16 V50" stroke="var(--chrome)" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <circle class="drip" cx="100" cy="56" r="4" fill="var(--accent)"/>
+
+          <g clip-path="url(#gclip)">
+            <g class="gfill">
+              <rect x="0" y="120" width="200" height="220" fill="url(#gwater)"/>
+              <path class="gwave" d="M-10 122 q30 -12 60 0 t60 0 t60 0 t60 0 v40 h-240z" fill="var(--accent)" opacity=".55"/>
+              <circle class="gbub" cx="82" cy="230" r="4" fill="#fff"/>
+              <circle class="gbub" cx="112" cy="242" r="3" fill="#fff"/>
+              <circle class="gbub" cx="96" cy="250" r="5" fill="#fff"/>
+              <circle class="gbub" cx="124" cy="236" r="2.5" fill="#fff"/>
+            </g>
+          </g>
+
+          <path d="M56 92 h88 l-9 150 a14 14 0 0 1 -14 13 h-42 a14 14 0 0 1 -14 -13 z"
+                stroke="var(--chrome)" stroke-width="3.5" stroke-linejoin="round" fill="none" opacity=".9"/>
+          <path d="M60 100 l-4 -8 h88 l-4 8z" fill="var(--chrome)" opacity=".28"/>
+          <ellipse cx="100" cy="262" rx="42" ry="6" fill="var(--accent)" opacity=".12"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CIFRE ================= -->
+<section class="strip" aria-label="Pe scurt">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat rv"><b data-count="70" data-suffix="%">0%</b><span>din corpul unui om înseamnă apă</span></div>
+      <div class="stat rv"><b data-count="4">0</b><span>filtre, unul după altul</span></div>
+      <div class="stat rv"><b data-count="50" data-prefix="~" data-suffix="%">0%</b><span>mai puțin dat pe apă decât la bidon</span></div>
+      <div class="stat rv"><b>0</b><span>bidoane cărate pe scări</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CALCULATOR ================= -->
+<section class="sect alt" id="cost">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">Cât economisești</p>
+      <h2>Câți bani dai pe an pe apă la bidon?</h2>
+      <p class="lead">Mută cursorul la câți oameni sunt în casă și vezi diferența. Estimare pornind de la aproximativ 2.500 lei pe an într-o casă cu 4 persoane.</p>
+    </div>
+
+    <div class="calc rv">
+      <div class="calc-top">
+        <div class="sl">
+          <label for="ppl">Oameni în casă</label>
+          <p class="val"><span id="pplOut">4</span> persoane</p>
+          <input class="r" id="ppl" type="range" min="1" max="8" step="1" value="4">
+        </div>
+        <div class="bars">
+          <div>
+            <div class="bar-h"><span class="muted">Apă la bidon, pe an</span><b id="costA">2.500 lei</b></div>
+            <div class="bar"><i class="b1" style="width:100%"></i></div>
+          </div>
+          <div>
+            <div class="bar-h"><span class="muted">Cu apă filtrată acasă</span><b id="costB">1.250 lei</b></div>
+            <div class="bar"><i class="b2" style="width:50%"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="save">
+        <b id="save">1.250 lei</b>
+        <p class="muted">economisiți în fiecare an la apă. Plus timpul și drumurile pe care nu le mai faci.</p>
+      </div>
+      <p class="disclaimer">Cifrele de mai sus sunt doar cât dai pe apă într-un an, nu prețul sistemului. Prețul sistemului și al montajului ți-l spun la telefon sau pe WhatsApp, după ce îmi zici ce ai nevoie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARATIE ================= -->
+<section class="sect" id="diferenta">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">Diferența</p>
+      <h2>Aceeași țeavă. Altă apă.</h2>
+      <p class="lead">Trage de linie și vezi ce rămâne în filtre: clor, calcar, nisip și rugină adunate pe drumul până la tine.</p>
+    </div>
+
+    <div class="cmp rv" id="cmp">
+      <div class="cmp-l cmp-dirty"><canvas id="cvDirty" aria-hidden="true"></canvas></div>
+      <div class="cmp-l cmp-clean" id="clean"><canvas id="cvClean" aria-hidden="true"></canvas></div>
+      <span class="cmp-tag tag-l">Direct de la robinet</span>
+      <span class="cmp-tag tag-r">Prin cele 4 filtre</span>
+      <div class="cmp-line" id="cmpLine"></div>
+      <div class="cmp-knob" id="cmpKnob" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 4 12l5 6"/><path d="m15 6 5 6-5 6"/></svg>
+      </div>
+      <input type="range" min="0" max="100" value="50" id="cmpRange" aria-label="Compară apa nefiltrată cu apa filtrată">
+    </div>
+    <p class="cmp-hint rv"><span>Imagine ilustrativă — trage cu degetul stânga/dreapta.</span></p>
+  </div>
+</section>
+
+<!-- ================= DE CE ================= -->
+<section class="sect alt" id="dece">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">De ce</p>
+      <h2>Trei motive care se simt din prima săptămână</h2>
+      <p class="lead">Apa nu e ceva ce cumperi o dată. O bei zilnic — diferența se vede la gust, la buget și la spatele tău.</p>
+    </div>
+    <div class="cards">
+      <div class="card rv">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.4-7 10-7 10z"/><path d="M3 12h4l2-3 2 6 2-4 2 2h4"/></svg>
+        <p class="tag">Sănătate</p>
+        <h3>Bei apă, nu clor</h3>
+        <p>Corpul tău e 70% apă — merită să fie apă bună. Filtrele rețin clorul, metalele grele, nisipul și rugina care vin prin țevi. Gustul se schimbă de la primul pahar.</p>
+      </div>
+      <div class="card rv">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="M17 6.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.6 5 3.2 5 1.3 5 3.3-2.2 3.2-5 3.2-5-1.3-5-3.2"/></svg>
+        <p class="tag">Economie</p>
+        <h3>Plătești o dată, bei tot anul</h3>
+        <p>O casă cu 4 persoane dă în jur de 2.500 lei pe an pe apă îmbuteliată. Cu apa filtrată acasă ajungi la aproximativ jumătate — și banii rămân în casă, nu în plastic.</p>
+      </div>
+      <div class="card rv">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/></svg>
+        <p class="tag">Confort</p>
+        <h3>Gata cu cărat bidoane</h3>
+        <p>Fără stivă de bidoane în bucătărie, fără „s-a terminat apa" duminică seara. Robinetul e plin la orice oră — pentru cafea, ceai și gătit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CELE 4 FILTRE ================= -->
+<section class="sect" id="cum">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">Cum funcționează</p>
+      <h2>Patru filtre, ascunse sub chiuvetă</h2>
+      <p class="lead">Totul intră sub chiuvetă, în dulapul pe care îl ai deja. Fiecare treaptă are treaba ei — ce scapă de una, prinde următoarea.</p>
+    </div>
+
+    <div class="flow">
+      <div class="rig-box rv">
+        <svg class="rig" viewBox="0 0 320 330" fill="none" aria-hidden="true">
+          <!-- blat -->
+          <rect x="4" y="66" width="312" height="13" rx="3" fill="var(--chrome)" opacity=".85"/>
+          <!-- chiuveta -->
+          <path d="M104 79 L112 160 H222 L230 79" fill="var(--raised)" stroke="var(--chrome)" stroke-width="3" stroke-linejoin="round"/>
+          <rect x="161" y="160" width="13" height="7" rx="2" fill="var(--chrome)"/>
+          <!-- robinet principal -->
+          <path d="M150 66 V24 q0-10 10-10 h20 q10 0 10 10 V42" stroke="var(--chrome)" stroke-width="6" stroke-linecap="round"/>
+          <!-- robinet separat -->
+          <path d="M258 66 V36 q0-9 9-9 h10 q9 0 9 9 V50" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
+          <circle class="drip2" cx="286" cy="56" r="3.6" fill="var(--accent)"/>
+          <!-- dulap -->
+          <path d="M10 79 V302 M310 79 V302" stroke="var(--line-2)" stroke-width="2"/>
+          <rect x="4" y="302" width="312" height="14" rx="3" fill="var(--raised)" stroke="var(--line)" stroke-width="1"/>
+          <!-- loc liber -->
+          <rect x="206" y="232" width="96" height="60" rx="10" fill="none" stroke="var(--line-2)" stroke-width="1.6" stroke-dasharray="5 6"/>
+          <!-- racord apa rece -->
+          <path d="M24 79 V142" stroke="var(--chrome)" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="24" cy="150" r="8" fill="var(--accent-2)"/>
+          <path class="flowline" d="M24 158 V190 H52" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- suport filtre -->
+          <rect x="34" y="190" width="150" height="9" rx="4" fill="var(--raised)" stroke="var(--line-2)" stroke-width="1.5"/>
+          <g class="cart" data-c="0">
+            <rect x="40" y="199" width="30" height="76" rx="10" fill="var(--raised)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="55" y="243" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" fill="var(--accent)">1</text>
+          </g>
+          <g class="cart" data-c="1">
+            <rect x="76" y="199" width="30" height="76" rx="10" fill="var(--raised)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="91" y="243" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" fill="var(--accent)">2</text>
+          </g>
+          <g class="cart" data-c="2">
+            <rect x="112" y="199" width="30" height="76" rx="10" fill="var(--raised)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="127" y="243" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" fill="var(--accent)">3</text>
+          </g>
+          <g class="cart" data-c="3">
+            <rect x="148" y="199" width="30" height="76" rx="10" fill="var(--raised)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="163" y="243" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" fill="var(--accent)">4</text>
+          </g>
+          <!-- iesire spre robinetul separat -->
+          <path class="flowline" d="M163 190 V176 H258 V79" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- sifon, in fata -->
+          <path d="M167 167 V196 q0 18 18 18 h46 q14 0 14 14 V302" stroke="var(--chrome)" stroke-width="7" stroke-linecap="round" fill="none" opacity=".32"/>
+          <!-- numere -->
+          <g font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500">
+            <circle cx="288" cy="20" r="10" fill="var(--accent)"/><text x="288" y="24" text-anchor="middle" fill="var(--btn-fg)">1</text>
+            <circle cx="109" cy="291" r="10" fill="var(--accent)"/><text x="109" y="295" text-anchor="middle" fill="var(--btn-fg)">2</text>
+            <circle cx="24" cy="112" r="10" fill="var(--accent)"/><text x="24" y="116" text-anchor="middle" fill="var(--btn-fg)">3</text>
+            <circle cx="254" cy="262" r="10" fill="var(--accent)"/><text x="254" y="266" text-anchor="middle" fill="var(--btn-fg)">4</text>
+          </g>
+        </svg>
+        <ol class="legend">
+          <li><b>1</b> Robinetul separat, montat lângă cel obișnuit — doar apă filtrată.</li>
+          <li><b>2</b> Cele patru filtre, prinse pe peretele dulapului.</li>
+          <li><b>3</b> Racordul la apa rece care există deja. Nu se schimbă instalația.</li>
+          <li><b>4</b> Rămâne loc sub chiuvetă pentru lucrurile tale.</li>
+        </ol>
+      </div>
+
+      <div class="steps">
+        <div class="step rv" data-s="0">
+          <span class="n">01</span>
+          <div><h3>Filtru de argint</h3><p>Ionizează și dezinfectează apa la intrarea în sistem. Prima barieră, înainte de orice altceva.</p></div>
+        </div>
+        <div class="step rv" data-s="1">
+          <span class="n">02</span>
+          <div><h3>Cărbune activ</h3><p>Reține microbii și clorul. Aici dispare mirosul acela de piscină pe care îl simți când umpli ceainicul.</p></div>
+        </div>
+        <div class="step rv" data-s="2">
+          <span class="n">03</span>
+          <div><h3>Filtru carbon</h3><p>Oprește metalele grele, nisipul și rugina adunate în instalația blocului sau a casei.</p></div>
+        </div>
+        <div class="step rv" data-s="3">
+          <span class="n">04</span>
+          <div><h3>Dedurizare</h3><p>Scoate calcarul. Mai puțină piatră în ceainic și în cafea, vase fără urme albe.</p></div>
+        </div>
+        <div class="outlet rv">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3v6"/><path d="M12 21a6 6 0 0 0 6-6c0-3.5-6-9-6-9s-6 5.5-6 9a6 6 0 0 0 6 6z"/></svg>
+          <p><b>La final:</b> un robinet separat, lângă cel obișnuit. Unul pentru vase, unul pentru băut. Restul instalației rămâne neatinsă.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INTREBARI ================= -->
+<section class="sect alt" id="intrebari">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">Întrebări frecvente</p>
+      <h2>Ce mă întreabă lumea la telefon</h2>
+    </div>
+    <div class="faq rv">
+      <details>
+        <summary>Se poate monta și la bloc? <span class="pm" aria-hidden="true"></span></summary>
+        <p><b>Da.</b> La bloc merge la fel ca la casă. Se leagă la robinetul de apă rece de sub chiuvetă — nu se umblă la instalația blocului.</p>
+      </details>
+      <details>
+        <summary>Îmi strică bucătăria? <span class="pm" aria-hidden="true"></span></summary>
+        <p>Nu umblu la mobilă și nu modific instalația. Pentru robinetul separat folosesc, dacă se poate, o gaură care există deja în blat sau în chiuvetă. Dacă nu există, e nevoie de una nouă — îți spun înainte și o dau doar dacă ești de acord.</p>
+      </details>
+      <details>
+        <summary>Cât durează montajul? <span class="pm" aria-hidden="true"></span></summary>
+        <p><b>O singură vizită.</b> Cât ține exact îți spun după ce îmi zici cum arată chiuveta și dulapul de sub ea.</p>
+      </details>
+      <details>
+        <summary>Cât de des se schimbă filtrele? <span class="pm" aria-hidden="true"></span></summary>
+        <p>Depinde de apa din zona ta și de cât consumați. Îți spun termenul la montaj, îți arăt cum se schimbă și te sun când se apropie.</p>
+      </details>
+      <details>
+        <summary>Pot bea direct de la robinetul nou? <span class="pm" aria-hidden="true"></span></summary>
+        <p><b>Da.</b> Ăsta e rostul lui: scoate doar apă trecută prin toate cele patru filtre. Pentru băut, cafea, ceai și gătit.</p>
+      </details>
+      <details>
+        <summary>Dacă apare o problemă peste un an? <span class="pm" aria-hidden="true"></span></summary>
+        <p>Mă suni pe același număr. Eu am montat, tot eu vin.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DESPRE ================= -->
+<section class="sect" id="despre">
+  <div class="wrap">
+    <p class="eyebrow rv" style="display:block;text-align:center;margin-bottom:18px">Cine vine la tine acasă</p>
+    <div class="me rv">
+      <div class="me-top">
+        <span class="mono-badge" aria-hidden="true">PM</span>
+        <div>
+          <p class="me-name">Prichindel Marius</p>
+          <p class="me-role">Montez și întrețin sisteme de purificare a apei · persoană fizică</p>
+        </div>
+      </div>
+      <p class="me-text">Nu suni la o firmă unde vorbești de fiecare dată cu altcineva. Eu răspund când suni, eu vin cu sistemul, eu îl montez și tot eu îți arăt cum se schimbă filtrele. Peste un an, când suni din nou, îți răspunde același om.</p>
+      <ul class="checks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Vin și mă uit înainte să comanzi ceva</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Dacă e nevoie de o gaură pentru robinet, îți spun înainte</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Îți arăt pe loc cum schimbi filtrele</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Rămân la telefon și după montaj</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="sect alt" id="contact">
+  <div class="wrap">
+    <div class="cbox rv">
+      <p class="eyebrow">Programează</p>
+      <h2>Un telefon acum, apă curată de mâine</h2>
+      <a class="tel" href="tel:+40767429724">0767&nbsp;429&nbsp;724</a>
+      <div class="cbtns">
+        <a class="btn btn-wa" href="https://wa.me/40767429724?text=Bun%C4%83%20ziua!%20A%C8%99%20dori%20o%20programare%20pentru%20montajul%20sistemului%20de%20purificare%20a%20apei." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.34.99 2.5c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+          Scrie pe WhatsApp
+        </a>
+        <a class="btn btn-1" href="tel:+40767429724">Sună acum</a>
+      </div>
+
+      <p class="qr-head">Sau trimite-mi direct un mesaj:</p>
+      <div class="qr">
+        <a class="qrow" target="_blank" rel="noopener" href="https://wa.me/40767429724?text=Bun%C4%83%20ziua!%20A%C8%99%20vrea%20o%20programare%20pentru%20montaj.%20C%C3%A2nd%20ave%C8%9Bi%20timp%3F">
+          <span>Vreau o programare</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <a class="qrow" target="_blank" rel="noopener" href="https://wa.me/40767429724?text=Bun%C4%83%20ziua!%20C%C3%A2t%20cost%C4%83%20sistemul%2C%20cu%20montaj%20cu%20tot%3F">
+          <span>Cât costă, cu montaj cu tot?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <a class="qrow" target="_blank" rel="noopener" href="https://wa.me/40767429724?text=Bun%C4%83%20ziua!%20Stau%20la%20bloc%20-%20se%20poate%20monta%20%C8%99i%20la%20mine%3F">
+          <span>Stau la bloc — se poate?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <a class="qrow" target="_blank" rel="noopener" href="https://wa.me/40767429724?text=Bun%C4%83%20ziua!%20C%C3%A2t%20de%20des%20se%20schimb%C4%83%20filtrele%3F">
+          <span>Cât de des se schimbă filtrele?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>© <span id="yr">2026</span> Prichindel Marius · persoană fizică · montaj sisteme de purificare a apei</p>
+    <p><a href="tel:+40767429724" style="text-decoration:none">0767 429 724</a></p>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/40767429724?text=Bun%C4%83%20ziua!%20A%C8%99%20dori%20o%20programare%20pentru%20montajul%20sistemului%20de%20purificare%20a%20apei." target="_blank" rel="noopener">
+  <span style="position:relative;display:inline-flex">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02s.87 2.34.99 2.5c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+    <span class="fab-ring" aria-hidden="true"></span>
+  </span>
+  Scrie-mi pe WhatsApp
+</a>
+
+<div class="callbar" id="callbar">
+  <a class="btn btn-1" href="tel:+40767429724">Sună acum</a>
+  <a class="btn btn-wa" href="https://wa.me/40767429724?text=Bun%C4%83%20ziua!%20A%C8%99%20dori%20o%20programare%20pentru%20montajul%20sistemului%20de%20purificare%20a%20apei." target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var yr = document.getElementById('yr');
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  /* --- nav + bara mobila --- */
+  var nav = document.getElementById('nav'), bar = document.getElementById('callbar');
+  function onScroll(){
+    var y = scrollY;
+    nav.classList.toggle('stuck', y > 8);
+    bar.classList.toggle('show', y > innerHeight * 0.55);
+  }
+  onScroll(); addEventListener('scroll', onScroll, {passive:true});
+
+  /* --- reveal --- */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {rootMargin:'0px 0px -6% 0px', threshold:.1});
+  document.querySelectorAll('.rv').forEach(function(el,i){
+    el.style.transitionDelay = (Math.min(i%4,3)*70)+'ms';
+    io.observe(el);
+  });
+
+  /* --- numere care cresc --- */
+  var cio = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      cio.unobserve(e.target);
+      var el = e.target, end = parseInt(el.dataset.count,10);
+      var pre = el.dataset.prefix||'', suf = el.dataset.suffix||'';
+      if (reduce){ el.textContent = pre+end+suf; return; }
+      var t0 = performance.now(), dur = 1100;
+      (function tick(now){
+        var p = Math.min((now-t0)/dur,1);
+        var v = Math.round(end * (1 - Math.pow(1-p,3)));
+        el.textContent = pre+v+suf;
+        if(p<1) requestAnimationFrame(tick);
+      })(t0);
+    });
+  }, {threshold:.5});
+  document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+
+  /* --- treapta activa --- */
+  var carts = [].slice.call(document.querySelectorAll('.cart'));
+  var steps = [].slice.call(document.querySelectorAll('.step'));
+  function setActive(i){
+    carts.forEach(function(c,k){ c.classList.toggle('off', k!==i); });
+    steps.forEach(function(s,k){ s.classList.toggle('on', k===i); });
+  }
+  setActive(0);
+  var sio = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting) setActive(parseInt(e.target.dataset.s,10)); });
+  }, {rootMargin:'-42% 0px -42% 0px'});
+  steps.forEach(function(s){ sio.observe(s); });
+
+  /* --- calculator --- */
+  var PER = 625;
+  var ppl = document.getElementById('ppl');
+  function lei(n){ return (Math.round(n/10)*10).toLocaleString('ro-RO')+' lei'; }
+  function calc(){
+    var n = +ppl.value, a = PER*n, b = a*0.5;
+    document.getElementById('pplOut').textContent = n;
+    document.getElementById('costA').textContent = lei(a);
+    document.getElementById('costB').textContent = lei(b);
+    document.getElementById('save').textContent = lei(a-b);
+  }
+  ppl.addEventListener('input', calc); calc();
+
+  /* --- comparatie apa --- */
+  var rng = document.getElementById('cmpRange'),
+      clean = document.getElementById('clean'),
+      line = document.getElementById('cmpLine'),
+      knob = document.getElementById('cmpKnob');
+  function setCmp(){
+    var v = +rng.value;
+    clean.style.clipPath = 'inset(0 0 0 '+v+'%)';
+    line.style.left = v+'%';
+    knob.style.left = v+'%';
+  }
+  rng.addEventListener('input', setCmp); setCmp();
+
+  function paint(id, kind){
+    var c = document.getElementById(id), x = c.getContext('2d');
+    function draw(){
+      var w = c.clientWidth, h = c.clientHeight, d = Math.min(devicePixelRatio||1, 2);
+      c.width = w*d; c.height = h*d; x.setTransform(d,0,0,d,0,0);
+      x.clearRect(0,0,w,h);
+      var n = kind==='dirty' ? Math.round(w*h/900) : Math.round(w*h/5200);
+      for (var i=0;i<n;i++){
+        var px = Math.random()*w, py = Math.random()*h;
+        if (kind==='dirty'){
+          var r = Math.random()*2.6+.4;
+          x.globalAlpha = .12+Math.random()*.4;
+          x.fillStyle = Math.random()>.55 ? '#3a2c12' : '#d8c9a2';
+          x.beginPath(); x.arc(px,py,r,0,6.3); x.fill();
+        } else {
+          x.globalAlpha = .16+Math.random()*.28;
+          x.fillStyle = '#ffffff';
+          x.beginPath(); x.arc(px,py,Math.random()*3+1,0,6.3); x.fill();
+        }
+      }
+      x.globalAlpha = 1;
+    }
+    draw();
+    addEventListener('resize', draw, {passive:true});
+  }
+  paint('cvDirty','dirty'); paint('cvClean','clean');
+
+  /* --- apa din hero --- */
+  var cv = document.getElementById('sea'), ctx = cv.getContext('2d');
+  var W=0,H=0,t=0,bub=[],col={a:'',b:'',c:''},visible=true,raf=null;
+  function readCol(){
+    var cs = getComputedStyle(document.documentElement);
+    col.a = cs.getPropertyValue('--wave-1').trim();
+    col.b = cs.getPropertyValue('--wave-2').trim();
+    col.c = cs.getPropertyValue('--wave-3').trim();
+  }
+  function size(){
+    var d = Math.min(devicePixelRatio||1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W*d; cv.height = H*d; ctx.setTransform(d,0,0,d,0,0);
+    bub = [];
+    var n = Math.round(W/70);
+    for (var i=0;i<n;i++) bub.push({x:Math.random()*W,y:Math.random()*H,r:1.4+Math.random()*4.4,v:.16+Math.random()*.42,w:Math.random()*6.3});
+  }
+  function wave(y0,amp,len,sp,color,ph){
+    ctx.beginPath(); ctx.moveTo(0,H); ctx.lineTo(0,y0);
+    for (var px=0;px<=W;px+=7){
+      var y = y0 + Math.sin(px/len + t*sp + ph)*amp + Math.sin(px/(len*.42) + t*sp*1.8 + ph)*(amp*.34);
+      ctx.lineTo(px,y);
+    }
+    ctx.lineTo(W,H); ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var top = H*.16;
+    wave(top+H*.10, 11, 200, .010, col.c, 0);
+    wave(top+H*.26, 15, 155, .014, col.b, 1.5);
+    wave(top+H*.44, 9, 115, .019, col.a, 2.8);
+    for (var i=0;i<bub.length;i++){
+      var b = bub[i];
+      if (b.y < top+H*.22){ b.y = H+b.r; b.x = Math.random()*W; }
+      ctx.globalAlpha = .45;
+      ctx.beginPath(); ctx.arc(b.x+Math.sin(t*.02+b.w)*6, b.y, b.r, 0, 6.3);
+      ctx.fillStyle = col.a; ctx.fill();
+      if (!reduce) b.y -= b.v;
+    }
+    ctx.globalAlpha = 1;
+  }
+  function loop(){ t++; draw(); raf = requestAnimationFrame(loop); }
+  readCol(); size(); draw();
+  if (!reduce) loop();
+  addEventListener('resize', function(){ size(); draw(); }, {passive:true});
+
+  var hio = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      visible = e.isIntersecting;
+      if (reduce) return;
+      if (visible && !raf) loop();
+      else if (!visible && raf){ cancelAnimationFrame(raf); raf = null; }
+    });
+  }, {threshold:0});
+  hio.observe(cv);
+
+  var mq = matchMedia('(prefers-color-scheme: dark)');
+  var onTheme = function(){ readCol(); draw(); };
+  if (mq.addEventListener) mq.addEventListener('change', onTheme);
+  new MutationObserver(onTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();
+</script>
