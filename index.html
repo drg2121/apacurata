@@ -434,12 +434,19 @@ footer{border-top:1px solid var(--line);padding:30px 0 calc(96px + env(safe-area
   .stat:nth-child(2n){border-right:1px solid var(--line)}
   .cards{grid-template-columns:repeat(2,1fr)}
 }
-@media (max-width:479px){
+@media (max-width:559px){
+  .nav{padding:8px 0}
   .brand i{display:none}
-  .brand b{font-size:.9rem}
-  .brand svg{width:28px;height:28px}
-  .eyebrow{letter-spacing:.13em;font-size:.66rem}
-  .btn-sm{padding:9px 13px;font-size:.75rem}
+  .brand b{font-size:.94rem}
+  .brand svg{width:29px;height:29px}
+  .nav-cta .btn-wa{display:none}
+  .eyebrow .ex{display:none}
+  .eyebrow{letter-spacing:.13em;font-size:.67rem}
+  .pill{display:none}
+  .hero{padding-top:18px}
+  .hero-grid{gap:26px}
+  .hero>.wrap>.hero-grid>div:first-child{gap:18px}
+  .hero-note{font-size:.82rem}
 }
 @media (min-width:560px){
   .cbtns{grid-template-columns:1fr 1fr;max-width:520px}
@@ -509,12 +516,12 @@ footer{border-top:1px solid var(--line);padding:30px 0 calc(96px + env(safe-area
   <div class="wrap">
     <div class="hero-grid">
       <div style="display:grid;gap:22px">
-        <p class="eyebrow fade-up">Montaj la domiciliu · 4 filtre · robinet separat</p>
+        <p class="eyebrow fade-up">Montaj la domiciliu<span class="ex"> · 4 filtre · robinet separat</span></p>
         <h1>
           <span class="ln"><span>Apa bună</span></span>
           <span class="ln"><span>nu se cară.</span></span>
         </h1>
-        <p class="lead fade-up d1">Îți montez sub chiuvetă un sistem cu patru filtre. Deschizi robinetul și curge apă curată — fără bidoane, fără drumuri la magazin, fără cărat pe scări.</p>
+        <p class="lead fade-up d1">Patru filtre montate sub chiuvetă. Deschizi robinetul și curge apă curată — fără bidoane, fără cărat pe scări.</p>
         <p class="pill fade-up d1"><span>Economisești ≈ 1.250 lei pe an</span> într-o casă cu 4 persoane</p>
         <div class="cta-row fade-up d2">
           <a class="btn btn-wa" href="https://wa.me/40767429724?text=Bun%C4%83%20ziua!%20A%C8%99%20dori%20o%20programare%20pentru%20montajul%20sistemului%20de%20purificare%20a%20apei." target="_blank" rel="noopener">
